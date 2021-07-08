@@ -29,15 +29,10 @@ app.post('/api/courses', (req, res) =>{
   const course ={
     id: courses.length+1,
     name: req.body.name,
-};
-courses.push(course);
-res.send(courses)
+   };
+   courses.push(course);
+   res.send(courses)
 });
-
-app.get("/api/courses", (req, res) => {
-  res.send(courses);
-});
-
 // Update
 app.put('/api/courses/:id' , (req, res) => {
 
@@ -63,19 +58,13 @@ app.delete('/api/courses/:id', (req, res) => {
 
   res.send(courses);
 });
+
 function validateCourse(course){
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
   });
    return schema.validate(course); 
 }
-  
-app.get("/api/courses/:id", (req, res) => {
-  const course = courses.find(c => c.id === parseInt(req.params.id))
-  if(!course) res.status(404).send('The course Id doe not exist')
-  res.send(course);
-
-});
 
 
 
